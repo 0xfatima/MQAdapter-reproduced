@@ -1,0 +1,19 @@
+{
+  "_comment": "Ablation D14: f_φ = identity (projections+attention+residual remain).",
+  "model": "mqadapter",
+  "clip_backend": "open_clip",
+  "k": 2,
+  "quantum_map": "identity",
+  "gamma": 0.001,
+  "adapt_layers": [6, 7, 8, 9, 10, 11],
+  "freeze_clip": true,
+  "batch_size": 8,
+  "epochs": 20,
+  "lr": 0.001,
+  "val_ratio": 0.15,
+  "seed": 0,
+  "device": "auto",
+  "download_clip": true,
+  "data_root": "data/brain_tumor_mri",
+  "out_dir": "runs/quantum_ablation_identity"
+}

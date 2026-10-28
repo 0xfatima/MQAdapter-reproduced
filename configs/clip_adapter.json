@@ -1,0 +1,22 @@
+{
+  "_comment": "Baseline 2: CLIP-Adapter-style MLP on the final 512-d image embedding (not the paper VQC).",
+  "model": "clip_adapter",
+  "clip_backend": "open_clip",
+  "bottleneck": 64,
+  "clip_adapter_residual": 0.2,
+  "freeze_clip": true,
+  "batch_size": 16,
+  "epochs": 20,
+  "lr": 0.001,
+  "weight_decay": 0.01,
+  "scheduler": "cosine",
+  "patience": 6,
+  "val_ratio": 0.15,
+  "seed": 0,
+  "device": "auto",
+  "mixed_precision": false,
+  "num_workers": 4,
+  "download_clip": true,
+  "data_root": "data/brain_tumor_mri",
+  "out_dir": "runs/clip_adapter"
+}

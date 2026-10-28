@@ -1,0 +1,13 @@
+{
+  "_comment": "DECLARED target hardware (user-reported). Measured values go to phase3_budget_report.json; later phases read the measured file, not this one, for batch sizes.",
+  "gpu_vram_gb": 12,
+  "system_ram_gb": 64,
+  "vram_headroom_gb": 1.5,
+  "vram_budget_gb": 10.5,
+  "device": "cuda",
+  "default_precision": "fp32",
+  "quantum_precision": "fp32 (always; VQC runs outside autocast)",
+  "dataloader_workers": "min(8, os.cpu_count())",
+  "pin_memory": true,
+  "frozen_prefix_feature_cache": {"enabled_in_phase": 8, "location": "RAM", "note": "exact-equivalence engineering optimisation; verified by test before use"}
+}

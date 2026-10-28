@@ -1,0 +1,11 @@
+{
+  "_comment": "Baseline 1: frozen CLIP ViT-B/16 cosine classifier. No adapter training. Use scripts/evaluate.py (train.py will error: 0 trainable params).",
+  "model": "frozen_clip",
+  "clip_backend": "open_clip",
+  "freeze_clip": true,
+  "batch_size": 16,
+  "device": "auto",
+  "download_clip": true,
+  "data_root": "data/brain_tumor_mri",
+  "out_dir": "runs/frozen_clip_zeroshot"
+}

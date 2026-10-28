@@ -1,0 +1,25 @@
+# Core (CPU or CUDA torch must be installed to match the machine).
+# GPU example (run yourself): pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+torch>=2.1
+torchvision
+numpy>=1.24
+pillow
+pytest
+matplotlib
+
+# CLIP (optional until you train the real backbone). ~350MB weight download.
+open_clip_torch
+
+# Optional quantum library used only by scripts/phase3_env_check.py.
+# On Python >= 3.12 install often fails; the training VQC does not need it.
+# torchquantum
+# torchquantum-ng
+
+# Added for the full pipeline
+scikit-learn      # t-SNE (scripts/tsne_features.py)
+kagglehub         # scripts/download_dataset.py
+ftfy
+regex
+tqdm
+# Paper's quantum library (optional; the PyTorch statevector VQC is the default backend):
+# torchquantum

@@ -1,0 +1,8 @@
+torch>=2.1
+torchvision
+numpy
+pillow
+open_clip_torch
+pytest
+matplotlib
+# torchquantum  # optional; Python 3.12 often needs torchquantum-ng instead

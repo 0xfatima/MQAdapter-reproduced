@@ -1,0 +1,20 @@
+{
+  "_comment": "Optional paper-like 16-shot protocol on Training only. Official Testing remains held out. Do not mix with full-data scores.",
+  "model": "mqadapter",
+  "clip_backend": "open_clip",
+  "k": 2,
+  "shots": 16,
+  "gamma": 0.001,
+  "adapt_layers": [6, 7, 8, 9, 10, 11],
+  "quantum_map": "vqc",
+  "freeze_clip": true,
+  "batch_size": 8,
+  "epochs": 50,
+  "lr": 0.001,
+  "val_ratio": 0.25,
+  "seed": 0,
+  "device": "auto",
+  "download_clip": true,
+  "data_root": "data/brain_tumor_mri",
+  "out_dir": "runs/fewshot_16_k2"
+}
