@@ -154,8 +154,10 @@ class _FakeBlock(nn.Module):
         self.lin = nn.Linear(width, width)
 
     def forward(self, x):
-        # x: LND
-        return x + self.lin(self.ln(x))
+        # x: LND (sequence-first). The token-mean term mixes tokens like attention does, so prompts and
+        # inserted tokens can influence the class token in tests (a per-token-only block could not).
+        h = self.ln(x)
+        return x + self.lin(h) + 0.1 * h.mean(dim=0, keepdim=True)
 
 
 class FakeCLIP(nn.Module):
@@ -196,7 +198,8 @@ class _FakeTextBlock(nn.Module):
         self.lin = nn.Linear(width, width)
 
     def forward(self, x, attn_mask=None):  # x: LND (sequence-first), like the original OpenAI CLIP
-        return x + self.lin(self.ln(x))
+        h = self.ln(x)
+        return x + self.lin(h) + 0.1 * h.mean(dim=0, keepdim=True)
 
 
 class FakeCLIPWithText(FakeCLIP):

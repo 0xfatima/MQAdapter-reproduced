@@ -1,4 +1,39 @@
-# MQAdapter for 4-class brain-tumor MRI (end-to-end pipeline)
+# MQAdapter for brain-tumor MRI - full reproduction pipeline
+
+Paper-based reimplementation of **MQAdapter** (Zhao et al., arXiv:2607.12418v1) with all three host methods of the
+paper (MaPLe, PromptSRC, MMRL++), the simple baselines (zero-shot CLIP, linear probe, CoOp, CoCoOp, CLIP-Adapter), all
+four evaluation protocols and every ablation/analysis, driven by one script:
+
+```text
+python main.py --make-dummy-data data/dummy --backend fake --quick     # 2-minute plumbing check, no downloads
+python main.py --data-root data/brain_tumor_mri                        # the whole paper suite on MRI (GPU hours)
+```
+
+* What is reproduced and what is not (about 85-90 %): `docs/REPRODUCTION_STATUS.md`
+* How to run, outputs, cost: `docs/RUNNING.md`; datasets and the paper's 15 datasets: `docs/DATASETS.md`
+* Engine code: `mqa/hosts/` (methods), `mqa/engine/` (splits, trainer, evaluation, analyses, report)
+
+## Methods (`--methods`)
+
+| name | what | paper role |
+|---|---|---|
+| `zeroshot` | frozen CLIP, hand prompts | "CLIP" row |
+| `linear_probe` | logistic regression on frozen features | extra baseline |
+| `clip_adapter`, `coop`, `cocoop` | classic fine-tuning | compared methods |
+| `maple`, `promptsrc`, `mmrlpp` (`mmrl`) | the three host methods | hosts |
+| `<any>+mqa` | same method with the MQAdapter plug-in | "+MQAdapter" rows |
+| `zeroshot+mqa` | MQAdapter alone on frozen CLIP | extra |
+
+## Tasks (`--tasks`)
+
+`topk` (Fig. 1), `base2new` (Table I), `fewshot` (Table II), `cross` (Table III), `dg` (Table IV), `ablation`
+(Table V), `sweeps` (Fig. 3/4), `stability` (Table VI), `efficiency` (Table VII), `tsne` (Fig. 5), `report`,
+and `all` (full-data MRI, not in the paper). Results: `runs/main/REPORT.md`.
+
+---
+
+# Earlier single-run tooling (still works)
+
 
 Paper-based reimplementation of **MQAdapter** (Zhao et al., arXiv:2607.12418v1) on the
 [Brain Tumor MRI dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset)
@@ -37,8 +72,7 @@ If `pytest` shows a failure, that is a bug in my code, not in your setup - pleas
 | Fig. 1 Top-K analysis, Fig. 5 t-SNE, Table VI seeds, Table VII params/FPS, K / gamma / depth sweeps | `scripts/topk_analysis.py`, `tsne_features.py`, `run_seeds.py`, `efficiency.py`, `run_sweep.py` |
 | One-command pipeline | `scripts/run_pipeline.py` |
 
-**Not implemented:** PromptSRC and MMRL++ hosts (their exact training details could not be checked offline, and
-a look-alike would be misleading), cross-dataset transfer and domain generalisation (need a second dataset).
+PromptSRC, MMRL++, CoOp, CoCoOp, cross-dataset and domain generalisation are now in the `main.py` engine (see the top of this file).
 
 ## Bugs fixed in the earlier code
 

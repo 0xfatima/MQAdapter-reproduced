@@ -14,9 +14,9 @@
 | Insert from layer 6 to last | Yes | default 6–11 0-indexed (D2) |
 | Eq. 16 cosine CE over all C | Yes | CLIP logit_scale |
 | Plug-in to MaPLe | **Yes (new)** | `mqa/models/maple.py`; re-implemented from the MaPLe paper/repo, not checked against official code |
-| Plug-in to PromptSRC / MMRL++ | **No** | Not implemented; stand-alone adapter and MaPLe host cover the host-independent claim only |
+| Plug-in to PromptSRC / MMRL++ | **Yes (engine)** | `mqa/hosts/promptsrc.py`, `mqa/hosts/mmrl.py`; re-implemented from their papers |
 | Base-to-new | **Yes (new)** | `protocol: base2new`, base={glioma, meningioma}, new={notumor, pituitary} (arbitrary halves) |
-| Cross-dataset / domain generalisation | **No** | Needs a second dataset |
+| Cross-dataset / domain generalisation | **Yes (engine)** | MRI targets (Figshare, Br35H) + synthetic MRI domain shifts; any folder dataset |
 | Few-shot 1/2/4/8/16 | Yes | `shots` key |
 | Table V ablations (cross-attention, separate VQC) | Yes (new) | `interaction`, `vqc_sharing`; exact baseline details of the paper's cross-attention are unspecified |
 | Fig. 1 / Fig. 5 / Table VI / Table VII analyses | Yes (new) | scripts listed in README |
